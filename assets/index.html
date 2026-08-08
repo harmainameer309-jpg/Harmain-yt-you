@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouVideo - Video & Music Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo-box">
+          <div class="inner-diamond"></div>
+        </div>
+        <h1 class="brand-title">YouVideo</h1>
+      </div>
+      <div class="header-actions">
+        <button id="btnSettings" class="icon-btn" title="Settings">⚙️</button>
+        <button id="btnHistory" class="icon-btn" title="History">🕒</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Search / URL Section -->
+      <section class="url-section">
+        <div class="input-card">
+          <input type="text" id="urlInput" placeholder="Paste YouTube, TikTok, Insta or X link here..." value="https://youtube.com/watch?v=dQw4w9WgXcQ" />
+          <button id="btnClear" class="clear-btn" style="display:none;">✕</button>
+          <button id="btnPaste" class="gradient-btn">PASTE</button>
+        </div>
+        <div class="platform-badges">
+          <span id="platformBadge" class="badge badge-pink">🎬 YouTube Detected</span>
+          <span class="badge badge-glass">4K Support</span>
+          <span class="badge badge-glass">320kbps MP3</span>
+        </div>
+      </section>
+
+      <!-- Preview Card -->
+      <section class="preview-card-wrapper">
+        <div class="glow-backdrop"></div>
+        <div class="preview-card">
+          <div class="thumbnail-container">
+            <img id="mediaThumbnail" src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600" alt="Video Thumbnail" />
+            <div class="play-overlay">▶</div>
+            <div id="mediaDuration" class="duration-badge">04:12</div>
+          </div>
+
+          <div class="media-info">
+            <h2 id="mediaTitle" class="media-title">Lofi Hip Hop Radio - Beats to Relax/Study to</h2>
+            <p id="mediaAuthor" class="media-author">Lofi Girl • 12K Watching</p>
+          </div>
+
+          <div class="formats-header">SELECT FORMAT & QUALITY</div>
+          <div id="formatsGrid" class="formats-grid">
+            <div class="format-chip selected" data-quality="1080p" data-size="45.0MB" data-type="VIDEO">
+              <div class="chip-label">VIDEO</div>
+              <div class="chip-val">1080p • 45MB</div>
+            </div>
+            <div class="format-chip" data-quality="MP3" data-size="8.2MB" data-type="AUDIO">
+              <div class="chip-label chip-pink">AUDIO ONLY</div>
+              <div class="chip-val">MP3 • 320kbps</div>
+            </div>
+            <div class="format-chip" data-quality="4K" data-size="128.5MB" data-type="VIDEO">
+              <div class="chip-label">ULTRA HD</div>
+              <div class="chip-val">4K • 128MB</div>
+            </div>
+            <div class="format-chip" data-quality="THUMB" data-size="1.2MB" data-type="THUMBNAIL">
+              <div class="chip-label">ARTWORK</div>
+              <div class="chip-val">Cover • 1.2MB</div>
+            </div>
+          </div>
+
+          <button id="btnDownload" class="gradient-btn-full">DOWNLOAD 1080P (45.0 MB)</button>
+
+          <!-- Download Progress Section -->
+          <div id="downloadProgressBox" class="progress-box" style="display: none;">
+            <div class="progress-header">
+              <span id="dlStatus">Downloading... 72%</span>
+              <span id="dlSpeed" class="text-pink">4.2 MB/s</span>
+            </div>
+            <div class="progress-bar-track">
+              <div id="dlProgressBar" class="progress-bar-fill" style="width: 72%;"></div>
+            </div>
+            <div class="progress-footer">
+              <span id="dlBytes">32.4MB / 45.0MB</span>
+              <span id="dlEta" class="text-pink">ETA: 3s</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent / Supported Platforms -->
+      <section class="platforms-section">
+        <div class="section-header">
+          <h3>SUPPORTED PLATFORMS</h3>
+          <span class="view-all">EXPLORE ALL</span>
+        </div>
+        <div class="platforms-scroll">
+          <div class="platform-circle bg-pink" data-url="https://youtube.com/watch?v=lofi">🎬</div>
+          <div class="platform-circle bg-cyan" data-url="https://tiktok.com/@creator/video/123">🎵</div>
+          <div class="platform-circle bg-purple" data-url="https://instagram.com/reel/C3x91">📷</div>
+          <div class="platform-circle bg-blue" data-url="https://x.com/space/status/987">🐦</div>
+          <div class="platform-circle bg-orange" data-url="https://soundcloud.com/artist/track">🎧</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-message">Link copied to clipboard!</div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <div class="nav-item active" data-tab="home">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">HOME</span>
+      </div>
+      <div class="nav-item" data-tab="active">
+        <span class="nav-icon">⬇️</span>
+        <span class="nav-label">ACTIVE</span>
+      </div>
+      <div class="nav-item" data-tab="library">
+        <span class="nav-icon">📂</span>
+        <span class="nav-label">LIBRARY</span>
+      </div>
+      <div class="nav-item" data-tab="browser">
+        <span class="nav-icon">🔍</span>
+        <span class="nav-label">BROWSER</span>
+      </div>
+    </nav>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
